@@ -14,12 +14,13 @@ export default class App extends React.Component {
       open: false
     };
   }
+  // Answersの初期設定
 
   render() {
     return (
       <section className="c-section">
         <div className="c-box">
-          <AnswersList />
+          <AnswersList answers={this.state.answers} />
         </div>
       </section>
     );

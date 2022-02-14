@@ -4,10 +4,10 @@ import { Answer } from './index.js';
 const AnswersLinst = () => {
   return (
     <div className="c-grid__answer">
-      <Answer />
-      <Answer />
-      <Answer />
-      <Answer />
+      <Answer content={"hoge"} />
+      <Answer content={"hoge"} />
+      <Answer content={"hoge"} />
+      <Answer content={"hoge"} />
     </div>
   )
 }

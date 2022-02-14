@@ -1,9 +1,9 @@
 import React from 'react';
-import { makeStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 
 
-const useStyles = makeStyles((style: ( theme )) => ({
+const useStyles = makeStyles((style: (theme)) => ({
     // createStyles({
     //     "button": {
     //         borderColor: "#FFB549",
@@ -22,11 +22,13 @@ const useStyles = makeStyles((style: ( theme )) => ({
 })
 );
 
-const Answer = () => {
+const Answer = (props) => {
     // const classes = useStyles; 
 
     return (
-        <Button variant="outlined"> Default  </Button>
+        <Button variant="outlined" color='primary'>
+            {props.content}
+        </Button>
     );
 };
 
