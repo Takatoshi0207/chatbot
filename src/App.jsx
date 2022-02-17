@@ -14,6 +14,41 @@ export default class App extends React.Component {
       open: false
     };
   }
+
+  displayNextQuestion = (nextQuestionId) =>{
+    const chats = this.state.chats
+    chats.push({
+      text: this.state.dataset[nextQuestionId].question,
+      type: 'question'
+    })
+
+    this.setState({
+      answers: this.state.dataset[nextQuestionId].answers,
+      chats:chats,
+      currentId: nextQuestionId
+    })
+  }
+
+  selectAnswer = (selectedAnswer, nextQuestionId) => {
+    switch (true) {
+      case (nextQuestionId === 'init'):
+        break;
+      default:
+        const chat = {
+          text: selectedAnswer,
+          type: 'answer'
+        }
+
+        const chats = this.state.chats;  //現在のchatsの状態を取得
+        chats.push(chat)                 //連想配列をPush
+
+        this.setState({
+          chats: chats
+        })
+        break;
+    }
+  }
+
   // Answersの初期設定
   initAnswer = () => {
     const initDataset = this.state.dataset[this.state.currentId];
