@@ -13,6 +13,7 @@ export default class App extends React.Component {
       dataset: defaultDataset,
       open: false
     };
+    this.selectAnswer = this.selectAnswer.bind(this)
   }
 
   displayNextQuestion = (nextQuestionId) =>{
@@ -32,19 +33,20 @@ export default class App extends React.Component {
   selectAnswer = (selectedAnswer, nextQuestionId) => {
     switch (true) {
       case (nextQuestionId === 'init'):
+        this.displayNextQuestion(nextQuestionId)
         break;
       default:
-        const chat = {
+        const chats = this.state.chats;  //現在のchatsの状態を取得
+        chats.push({
           text: selectedAnswer,
           type: 'answer'
-        }
-
-        const chats = this.state.chats;  //現在のchatsの状態を取得
-        chats.push(chat)                 //連想配列をPush
+        })                 //連想配列をPush
 
         this.setState({
           chats: chats
         })
+        
+        this.displayNextQuestion(nextQuestionId)
         break;
     }
   }
@@ -59,24 +61,9 @@ export default class App extends React.Component {
     })
   }
 
-  initChats = () => {
-    const initDataset = this.state.dataset[this.state.currentId];
-    const chat = {
-      text: initDataset.question,
-      type: 'question'
-    }
-
-    const chats = this.state.chats;  //現在のchatsの状態を取得
-    chats.push(chat)                 //連想配列をPush
-
-    this.setState({
-      chats: chats
-    })
-  }
-
   componentDidMount() {
-    this.initChats();  // chatsの呼び出し
-    this.initAnswer()
+    const initAnswer = "";
+    this.selectAnswer(initAnswer, this.state.currentId) //selectAnswerのswitchにとぶ
   }
 
   render() {
@@ -84,7 +71,7 @@ export default class App extends React.Component {
       <section className="c-section">
         <div className="c-box">
           <Chats chats={this.state.chats} />
-          <AnswersList answers={this.state.answers} />
+          <AnswersList answers={this.state.answers} select={this.selectAnswer}/> 
         </div>
       </section>
     );
